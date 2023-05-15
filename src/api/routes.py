@@ -66,29 +66,32 @@ def get_user(user_id):
 # ____Agregar clientes___
 
 
-# @api.route('/clientes', methods=["POST"])
-# def add_cliente():
-#     nombre = request.json.get("nombre", None)
-#     telefono = request.json.get("telefono", None)
-#     user_id = request.json.get("user_id", None)
+@api.route('/user/operation', methods=["POST"])
+def operation(first, op_type, second):
+    first = request.json.get("first", None)
+    second = request.json.get("second", None)
+    op_type = request.json.get("op_type", None)
 
-#     if nombre is None:
-#         return jsonify({"msg": "Bad request"}), 400
+    if first is None:
+        return jsonify({"msg": "Bad request"}), 400
 
-#     if user_id is None:
-#         return jsonify({"msg": "Bad request"}), 400
+    if op_type is None:
+        return jsonify({"msg": "Bad request"}), 400
 
-#     cliente = Cliente(nombre=nombre, telefono=telefono,
-#                       direccion=direccion, user_id=user_id)
-#     db.session.add(cliente)
-#     db.session.commit()
+    if second is None:
+        return jsonify({"msg": "Bad request"}), 400
 
-#     mascota = Mascota(nombre=nombre_mascota, especie=especie,
-#                       raza=raza, internamiento=internamiento, cliente_id=cliente.id)
-#     db.session.add(mascota)
-#     db.session.commit()
+    cliente = Cliente(nombre=nombre, telefono=telefono,
+                      direccion=direccion, user_id=user_id)
+    db.session.add(cliente)
+    db.session.commit()
 
-#     return jsonify("msg: Datos del cliente añadidos"), 200
+    mascota = Mascota(nombre=nombre_mascota, especie=especie,
+                      raza=raza, internamiento=internamiento, cliente_id=cliente.id)
+    db.session.add(mascota)
+    db.session.commit()
+
+    return jsonify("msg: Datos del cliente añadidos"), 200
 
 
 # Delete cliente
