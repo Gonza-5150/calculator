@@ -41,10 +41,10 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
-# ***********************ENPOINT USUARIOS************************
+# ***********************ENPOINT USERS************************
 # ---------------------------------------------------------------
 
-# lista todos los médicos
+# All Users
 
 
 @api.route('/users', methods=["GET"])
@@ -55,65 +55,61 @@ def get_usuarios():
     return jsonify(response_body), 200
 
 
-# ***********************ENPOINT CLIENTES************************
-# ---------------------------------------------------------------
+# Each User
 
 
-# lista por cada cliente
-
-
-@api.route('/clientes/<int:id_cliente>', methods=["GET"])
-def get_cliente(id_cliente):
-    cliente = User.query.get(id_cliente)
+@api.route('/users/<int:user_id>', methods=["GET"])
+def get_user(user_id):
+    user = User.query.get(user_id)
     return jsonify(user.serialize()), 200
 
 # ____Agregar clientes___
 
 
-@api.route('/clientes', methods=["POST"])
-def add_cliente():
-    nombre = request.json.get("nombre", None)
-    telefono = request.json.get("telefono", None)
-    user_id = request.json.get("user_id", None)
+# @api.route('/clientes', methods=["POST"])
+# def add_cliente():
+#     nombre = request.json.get("nombre", None)
+#     telefono = request.json.get("telefono", None)
+#     user_id = request.json.get("user_id", None)
 
-    if nombre is None:
-        return jsonify({"msg": "Bad request"}), 400
+#     if nombre is None:
+#         return jsonify({"msg": "Bad request"}), 400
 
-    if user_id is None:
-        return jsonify({"msg": "Bad request"}), 400
+#     if user_id is None:
+#         return jsonify({"msg": "Bad request"}), 400
 
-    cliente = Cliente(nombre=nombre, telefono=telefono,
-                      direccion=direccion, user_id=user_id)
-    db.session.add(cliente)
-    db.session.commit()
+#     cliente = Cliente(nombre=nombre, telefono=telefono,
+#                       direccion=direccion, user_id=user_id)
+#     db.session.add(cliente)
+#     db.session.commit()
 
-    mascota = Mascota(nombre=nombre_mascota, especie=especie,
-                      raza=raza, internamiento=internamiento, cliente_id=cliente.id)
-    db.session.add(mascota)
-    db.session.commit()
+#     mascota = Mascota(nombre=nombre_mascota, especie=especie,
+#                       raza=raza, internamiento=internamiento, cliente_id=cliente.id)
+#     db.session.add(mascota)
+#     db.session.commit()
 
-    return jsonify("msg: Datos del cliente añadidos"), 200
+#     return jsonify("msg: Datos del cliente añadidos"), 200
 
 
 # Delete cliente
-@api.route('/clientes/<int:id_cliente>', methods=["DELETE"])
-def delete_cliente(id_cliente):
-    delete = Cliente.query.filter_by(id=id_cliente).first()
-    db.session.delete(delete)
-    db.session.commit()
-    return jsonify({"msj": "Cliente borrado"}), 200
+# @api.route('/clientes/<int:id_cliente>', methods=["DELETE"])
+# def delete_cliente(id_cliente):
+#     delete = Cliente.query.filter_by(id=id_cliente).first()
+#     db.session.delete(delete)
+#     db.session.commit()
+#     return jsonify({"msj": "Cliente borrado"}), 200
 
 # Put Cliente
 
 
-@api.route('/clientes/<int:id>', methods=["PUT"])
-def update_cliente(id):
-    body = request.get_json()
-    print(id)
-    cliente = Cliente.query.filter(Cliente.id == id).update({
-        Cliente.nombre: body["nombre"],
-        Cliente.direccion: body["direccion"],
-        Cliente.telefono: body["telefono"],
-        Cliente.user_id: body["user_id"]}, synchronize_session=False)
-    db.session.commit()
-    return jsonify({"msj": "Cliente actualizado"}), 200
+# @api.route('/clientes/<int:id>', methods=["PUT"])
+# def update_cliente(id):
+#     body = request.get_json()
+#     print(id)
+#     cliente = Cliente.query.filter(Cliente.id == id).update({
+#         Cliente.nombre: body["nombre"],
+#         Cliente.direccion: body["direccion"],
+#         Cliente.telefono: body["telefono"],
+#         Cliente.user_id: body["user_id"]}, synchronize_session=False)
+#     db.session.commit()
+#     return jsonify({"msj": "Cliente actualizado"}), 200
