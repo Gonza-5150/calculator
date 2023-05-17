@@ -26,7 +26,7 @@ class User(db.Model):
 
 class Operation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    op_type = db.Column(db.String(255), unique=False, nullable=False)
+    op_type = db.Column(db.String(50), unique=False, nullable=False)
     cost = db.Column(db.Integer, unique=False, nullable=False)
 
     def __repr__(self):
@@ -42,25 +42,24 @@ class Operation(db.Model):
 
 class Record(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    operation_id = db.Column(db.Integer, db.ForeignKey(
+        'operation.id'), nullable=False)
+    user_id = operation_id = db.Column(
+        db.Integer, db.ForeignKey('user.id'), nullable=False)
+    amount = db.Column(db.Float, nullable=False)
+    user_balance = db.Column(db.Float, nullable=False)
+    operation_response = db.Column(db.String(200))
     date = db.Column(db.Date, unique=False, nullable=False)
-
-    result = db.Column(db.Integer, unique=False, nullable=False)
-    user_id = db.Column(db.Integer, ForeignKey(
-        'user.id'))
-    op_type_id = db.Column(db.Integer, ForeignKey(
-        'operation.id'))
-    operation = db.relationship('Operation', backref='records')
-    user_balance = db.Column(Integer, unique=False, nullable=False)
 
     def serialize(self):
         return {
             "id": self.id,
             "date": self.date,
-            "op_type_id": self.op_type_id,
-            "operation": self.operation,
+            "operation_id": self.operation_id,
             "result": self.result,
             "amount": self.amount,
             "user_balance": self.user_balance,
-            "user_id": self.user_id
+            "user_id": self.user_id,
+            "operation_response": self.operation_response
 
         }

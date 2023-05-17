@@ -63,30 +63,150 @@ def get_user(user_id):
     user = User.query.get(user_id)
     return jsonify(user.serialize()), 200
 
-# ____Add User___
+# ADITION **
 
 
-@api.route('/users/operation', methods=["POST"])
-def operation(first, op_type, second):
-    first = request.json.get("first", None)
-    second = request.json.get("second", None)
-    op_type = request.json.get("op_type", None)
+@api.route('/users/addition', methods=["POST"])
+def addition():
+    data = request.json
+    user_id = data['user_id']
+    amount1 = data['amount1']
+    amount2 = data['amount2']
 
-    if first is None:
-        return jsonify({"msg": "Bad request"}), 400
+    user = User.query.get(user_id)
+    operation = Operation.query.filter_by(type='addition').first()
 
-    if op_type is None:
-        return jsonify({"msg": "Bad request"}), 400
+    if not user or not operation:
+        return jsonyfy({'messaje': 'User or operation not found'}), 404
 
-    if second is None:
-        return jsonify({"msg": "Bad request"}), 400
+    cost = operation.cost
+    user_balance = user_balance - cost
 
-    operation = Operation(date=date, op_type=op_type,
-                          user_id=user_id)
-    db.session.add(operation)
+    if user_balance < 0:
+        return jsonify({'message': 'Insuficient balance'}), 403
+
+    result = amount1 + amount2
+    record = Record(
+        operation_id=operation.id,
+        user_id=user.id,
+        amount=result,
+        user_balance=user_balance,
+        operation_response=str(result),
+        date=func.now()
+    )
+
+    db.session.add(record)
     db.session.commit()
 
-    return jsonify("msg: operation ok"), 200
+    return jsonify({'result': result}), 200
+
+# SUBSTRACTION ***
+
+
+def subtraction():
+    data = request.json
+    user_id = data['user_id']
+    amount1 = data['amount1']
+    amount2 = data['amount2']
+
+    user = User.query.get(user_id)
+    operation = Operation.query.filter_by(type='substraction').first()
+
+    if not user or not operation:
+        return jsonyfy({'messaje': 'User or operation not found'}), 404
+
+    cost = operation.cost
+    user_balance = user_balance - cost
+
+    if user_balance < 0:
+        return jsonify({'message': 'Insuficient balance'}), 403
+
+    result = amount1 - amount2
+    record = Record(
+        operation_id=operation.id,
+        user_id=user.id,
+        amount=result,
+        user_balance=user_balance,
+        operation_response=str(result),
+        date=func.now()
+    )
+
+    db.session.add(record)
+    db.session.commit()
+
+    return jsonify({'result': result}), 200
+
+# DIVISION ***
+
+
+def division():
+    data = request.json
+    user_id = data['user_id']
+    amount1 = data['amount1']
+    amount2 = data['amount2']
+
+    user = User.query.get(user_id)
+    operation = Operation.query.filter_by(type='division').first()
+
+    if not user or not operation:
+        return jsonyfy({'messaje': 'User or operation not found'}), 404
+
+    cost = operation.cost
+    user_balance = user_balance / cost
+
+    if user_balance < 0:
+        return jsonify({'message': 'Insuficient balance'}), 403
+
+    result = amount1 + amount2
+    record = Record(
+        operation_id=operation.id,
+        user_id=user.id,
+        amount=result,
+        user_balance=user_balance,
+        operation_response=str(result),
+        date=func.now()
+    )
+
+    db.session.add(record)
+    db.session.commit()
+
+    return jsonify({'result': result}), 200
+
+# MULTIPLICATION ***
+
+
+def multiplication():
+    data = request.json
+    user_id = data['user_id']
+    amount1 = data['amount1']
+    amount2 = data['amount2']
+
+    user = User.query.get(user_id)
+    operation = Operation.query.filter_by(type='multiplication').first()
+
+    if not user or not operation:
+        return jsonyfy({'messaje': 'User or operation not found'}), 404
+
+    cost = operation.cost
+    user_balance = user_balance * cost
+
+    if user_balance < 0:
+        return jsonify({'message': 'Insuficient balance'}), 403
+
+    result = amount1 + amount2
+    record = Record(
+        operation_id=operation.id,
+        user_id=user.id,
+        amount=result,
+        user_balance=user_balance,
+        operation_response=str(result),
+        date=func.now()
+    )
+
+    db.session.add(record)
+    db.session.commit()
+
+    return jsonify({'result': result}), 200
 
 
 # Delete user
