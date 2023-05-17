@@ -1,8 +1,5 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import { AgendaCliente } from "../component/agendaCliente";
-import { ListaMascotasCliente } from "../component/listaMascotasCliente";
-import { Expediente } from "../component/expediente";
 import "../../styles/cliente.css";
 
 export const VistaCliente = () => {
@@ -23,7 +20,7 @@ export const VistaCliente = () => {
                 type="text"
                 class="form-control"
                 id="formGroupExampleInput"
-                placeholder="Example input placeholder"
+                placeholder="Put your first number"
               />
             </div>
             <button type="button" class="btn btn-primary">
@@ -52,9 +49,12 @@ export const VistaCliente = () => {
                 type="text"
                 class="form-control"
                 id="formGroupExampleInput2"
-                placeholder="Another input placeholder"
+                placeholder="Put your second number"
               />
             </div>
+            <button type="button" class="btn btn-dark">
+              Result
+            </button>
             <input
               class="form-control"
               type="text"

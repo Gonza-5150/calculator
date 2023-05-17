@@ -48,7 +48,7 @@ export const Footer = () => (
                 estevesgonzalo@hotmail.com
               </p>
               <p>
-                <i className="fas fa-phone me-2" /> +54 11 3469 414
+                <i className="fas fa-phone me-2" /> +54 11 3469 4414
               </p>
             </div>
             {/* Grid column */}

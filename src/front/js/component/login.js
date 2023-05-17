@@ -92,15 +92,7 @@ export const Login = () => {
             </div>
           </div>
           <div className="d-grid align-self-end">
-            <div className="text-center ps-5 ms-5">
-              <img
-                src="perrogato.png"
-                alt="Perro y gato"
-                width="860"
-                height="704"
-                className="align-self-end"
-              />
-            </div>
+            <div className="text-center ps-5 ms-5"></div>
           </div>
         </div>
       </div>

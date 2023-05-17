@@ -6,14 +6,10 @@ import { Home } from "./pages/home";
 import { Profile } from "./pages/profile";
 import { Datatable } from "./pages/datatable";
 import { Datatable2 } from "./pages/datatable2.js";
-import { AtencionMedica } from "./pages/atencionMedica";
 import { VistaCliente } from "./pages/vistaCliente";
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { Expediente } from "./component/expediente";
-import EventCalendar from "./pages/EventCalendar";
-
 
 //create your first component
 const Layout = () => {
@@ -28,13 +24,7 @@ const Layout = () => {
           <Navbar />
           <Routes>
             <Route element={<Home />} path="/" />
-            <Route element={<Profile />} path="/editarperfil" />
-            <Route element={<Datatable />} path="/usuarios" />
-            <Route element={<Datatable2 />} path="/mascotas" />
-            <Route element={<EventCalendar />} path="/agenda" />
             <Route element={<VistaCliente />} path="/cliente" />
-            <Route element={<Expediente />} path="/expediente" />
-            <Route element={<AtencionMedica />} path="/atencionmedica" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />

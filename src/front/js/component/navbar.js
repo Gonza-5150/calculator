@@ -43,27 +43,15 @@ export const Navbar = () => {
                   <li
                     className="nav-item border border-white rounded mx-3 border-opacity-75 shadow-lg"
                     id="botonNav"
-                  >
-                    <a className="nav-link px-4" href="#bgBeneficios">
-                      Beneficios
-                    </a>
-                  </li>
+                  ></li>
                   <li
                     className="nav-item border border-white rounded mx-3 border-opacity-75"
                     id="botonNav"
-                  >
-                    <a className="nav-link px-4" href="#aboutUs">
-                      Nosotros
-                    </a>
-                  </li>
+                  ></li>
                   <li
                     className="nav-item border border-white rounded mx-3 border-opacity-75"
                     id="botonNav"
-                  >
-                    <a className="nav-link px-4" href="#contactUs">
-                      Contacto
-                    </a>
-                  </li>
+                  ></li>
                 </>
               )}
               {userLogueado && store.tipoUsuario == 1 && (
