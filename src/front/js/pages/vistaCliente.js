@@ -10,7 +10,7 @@ export const VistaCliente = () => {
 
   return (
     <>
-      <h3 className="text-success m-2 p-4">¡Bienvenido, cliente!</h3>
+      <h3 className="text-success m-2 p-4">¡Welcome to calculator!</h3>
       <div className="m-2 p-3">
         <div className="d-flex justify-content-between">
           <div className="ms-5">

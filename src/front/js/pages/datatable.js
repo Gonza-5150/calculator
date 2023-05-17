@@ -2,7 +2,15 @@ import React, { useEffect, useState } from "react";
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
 import axios from "axios";
-import { Modal, TextField, Button, Avatar, FormGroup, FormControlLabel, Checkbox } from "@material-ui/core";
+import {
+  Modal,
+  TextField,
+  Button,
+  Avatar,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -65,7 +73,7 @@ const columnas = [
 ];
 
 //Tabla clientes vista medica url
-const clientesUrl = process.env.BACKEND_URL + "/api/clientes";
+const clientesUrl = process.env.BACKEND_URL + "/api/users";
 
 //estilos para material-table
 
@@ -122,15 +130,9 @@ export const Datatable = () => {
   };
   //__________metodo POST____________
   const postCliente = async () => {
-    await axios
-      .post(clientesUrl, clienteInput)
-      .then((res) => {
-        setDatos(data.concat(res.data));
-        
-        
-        
-      })
-      
+    await axios.post(clientesUrl, clienteInput).then((res) => {
+      setDatos(data.concat(res.data));
+    });
   };
 
   useEffect(() => {
@@ -155,14 +157,14 @@ export const Datatable = () => {
         name="nombre"
         onChange={handleChange}
       />
-      <br/>
+      <br />
       <TextField
         className={styles.inputMaterial}
         label="Dirección"
         name="direccion"
         onChange={handleChange}
       />
-      <br/>
+      <br />
       <TextField
         className={styles.inputMaterial}
         label="Teléfono"
@@ -196,16 +198,31 @@ export const Datatable = () => {
       <br />
       <br />
       <FormGroup>
-    <FormControlLabel control={<Checkbox defaultChecked   sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} />} label="Internamiento" />
-   
-   
-    </FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              defaultChecked
+              sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
+            />
+          }
+          label="Internamiento"
+        />
+      </FormGroup>
 
       <br />
       <br />
       <br />
       <div align="right">
-      <Button color="primary" onClick={() => {postCliente(); abrirCerrarModalInsertar();  window.location.reload(false);}}>Guardar</Button>
+        <Button
+          color="primary"
+          onClick={() => {
+            postCliente();
+            abrirCerrarModalInsertar();
+            window.location.reload(false);
+          }}
+        >
+          Guardar
+        </Button>
         <Button onClick={() => abrirCerrarModalInsertar()}>Cancelar</Button>
       </div>
     </div>

@@ -81,17 +81,12 @@ def operation(first, op_type, second):
     if second is None:
         return jsonify({"msg": "Bad request"}), 400
 
-    cliente = Cliente(nombre=nombre, telefono=telefono,
-                      direccion=direccion, user_id=user_id)
-    db.session.add(cliente)
+    operation = Operation(date=date, op_type=op_type,
+                          user_id=user_id)
+    db.session.add(operation)
     db.session.commit()
 
-    mascota = Mascota(nombre=nombre_mascota, especie=especie,
-                      raza=raza, internamiento=internamiento, cliente_id=cliente.id)
-    db.session.add(mascota)
-    db.session.commit()
-
-    return jsonify("msg: Datos del cliente añadidos"), 200
+    return jsonify("msg: operation ok"), 200
 
 
 # Delete cliente
