@@ -4,6 +4,7 @@ import "../../img/cat-error.png";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      currentUser: null,
       message: null,
       token: null,
       entrar: null,
@@ -164,6 +165,59 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         //reset the global store
         setStore({ demo: demo });
+      },
+
+      // ejemplo
+      addition: async (firstNumber, secondNumber) => {
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: email,
+            password: password,
+          }),
+        };
+        try {
+          const resp = await fetch(
+            process.env.BACKEND_URL + "/api/token",
+            opts
+          );
+          if (resp.status !== 200) {
+            if (resp.status === 401) {
+              Swal.fire({
+                imageUrl: "cat-error.png",
+                imageWidth: 180,
+                imageHeight: 180,
+                imageAlt: "cat",
+                title: "Ups",
+                text: "Correo o contraseña incorrecta",
+                confirmButtonColor: "orange",
+              });
+              return false;
+            }
+            Swal.fire({
+              imageUrl: "cat-error.png",
+              imageWidth: 180,
+              imageHeight: 180,
+              imageAlt: "cat",
+              title: "Ups",
+              text: "Error al accesar. Intente de nuevo.",
+              confirmButtonColor: "orange",
+            });
+            return false;
+          }
+
+          const data = await resp.json();
+          console.log("from the back", data);
+          sessionStorage.setItem("token", data.access_token);
+          console.log(data);
+          setStore({ token: data.access_token });
+          return true;
+        } catch (error) {
+          console.error("There has been an error");
+        }
       },
     },
   };

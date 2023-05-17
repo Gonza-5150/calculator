@@ -10,6 +10,7 @@ import { VistaCliente } from "./pages/vistaCliente";
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Calculator } from "./component/calculator";
 
 //create your first component
 const Layout = () => {

@@ -29,7 +29,7 @@ def login():
         if (email == x["email"]) and (password == x["password"]):
             userIn = True
             access_token = create_access_token(identity=email)
-            return jsonify(access_token=access_token)
+            return jsonify(access_token=access_token, user_id=x["id"])
     if (userIn == False):
         return jsonify({"msg": "Correo o contraseña incorrectos"}), 401
 

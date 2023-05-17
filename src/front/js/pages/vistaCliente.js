@@ -1,9 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import axios from "axios";
 import { Context } from "../store/appContext";
 import "../../styles/cliente.css";
+import Calculator from "../component/calculator";
 
 export const VistaCliente = () => {
   const { store, actions } = useContext(Context);
+
+  const [operation, setOperation] = useState();
+  const [firstNumber, setFirstNumber] = useState();
+  const [secondNumber, setSecondNumber] = useState();
 
   return (
     <>
@@ -12,55 +18,83 @@ export const VistaCliente = () => {
         <div className="d-flex justify-content-between align-middle">
           <div className="ms-5">
             <h4 className="text-success text-sm-start m-2">Calculator</h4>
-            <div class="mb-3">
-              <label for="formGroupExampleInput" class="form-label">
+            <div className="mb-3">
+              <label htmlFor="formGroupExampleInput" className="form-label">
                 First number
               </label>
               <input
+                value={firstNumber}
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="formGroupExampleInput"
                 placeholder="Put your first number"
+                onChange={(e) => setFirstNumber(e.target.value)}
               />
             </div>
-            <button type="button" class="btn btn-primary">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => setOperation("addition")}
+            >
               +
             </button>
-            <button type="button" class="btn btn-secondary">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => setOperation("substraction")}
+            >
               -
             </button>
-            <button type="button" class="btn btn-success">
+            <button
+              type="button"
+              className="btn btn-success"
+              onClick={() => setOperation("multiplication")}
+            >
               X
             </button>
-            <button type="button" class="btn btn-danger">
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => setOperation("division")}
+            >
               %
             </button>
-            <button type="button" class="btn btn-warning">
+            <button
+              type="button"
+              className="btn btn-warning"
+              onClick={() => setOperation("sqrt")}
+            >
               sqr
             </button>
-            <button type="button" class="btn btn-info">
+            <button
+              type="button"
+              className="btn btn-info"
+              onClick={() => setOperation("randn")}
+            >
               randN
             </button>
-            <div class="mb-3">
-              <label for="formGroupExampleInput2" class="form-label">
+            <div className="mb-3">
+              <label htmlFor="formGroupExampleInput2" className="form-label">
                 Second number
               </label>
               <input
+                value={secondNumber}
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="formGroupExampleInput2"
                 placeholder="Put your second number"
+                onChange={(e) => setSecondNumber(e.target.value)}
               />
             </div>
-            <button type="button" class="btn btn-dark">
+            <button type="button" className="btn btn-dark">
               Result
             </button>
             <input
-              class="form-control"
+              className="form-control"
               type="text"
               value="Result..."
               aria-label="result"
-              readonly
+              readOnly
             ></input>
           </div>
         </div>
