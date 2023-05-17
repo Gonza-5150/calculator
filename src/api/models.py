@@ -45,17 +45,18 @@ class Record(db.Model):
     date = db.Column(db.Date, unique=False, nullable=False)
 
     result = db.Column(db.Integer, unique=False, nullable=False)
-    cost = db.Column(db.Integer, unique=False, nullable=False)
-
     user_id = db.Column(db.Integer, ForeignKey(
         'user.id'))
     op_type_id = db.Column(db.Integer, ForeignKey(
         'operation.id'))
+    operation = db.relationship('Operation', backref='records')
+    user_balance = db.Column(Integer, unique=False, nullable=False)
 
     def serialize(self):
         return {
             "id": self.id,
             "date": self.date,
+            "op_type_id": self.op_type_id,
             "operation": self.operation,
             "result": self.result,
             "amount": self.amount,
