@@ -5,6 +5,7 @@ import "../../styles/navbar.css";
 import "../../img/LogotipoPS.png";
 import "../../img/navbar2.png";
 import "../../img/dogs.png";
+import "../../img/calculadora.png";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
@@ -16,10 +17,10 @@ export const Navbar = () => {
       <div className="container-fluid">
         <a className="navbar-brand ms-5 ps-2">
           <img
-            src="LogotipoPS.png"
+            src="calculadora.png"
             alt="Logo"
-            width="150"
-            height="140"
+            width="100"
+            height="100"
             className="d-inline-block align-text-top"
           />
         </a>
@@ -65,7 +66,7 @@ export const Navbar = () => {
                   </li>
                 </>
               )}
-              {(userLogueado && store.tipoUsuario == 1) && (
+              {userLogueado && store.tipoUsuario == 1 && (
                 <>
                   <Link to="/agenda">
                     <li
@@ -114,7 +115,7 @@ export const Navbar = () => {
                   </Link>
                 </>
               )}
-              {(userLogueado && store.tipoUsuario == 2) && (
+              {userLogueado && store.tipoUsuario == 2 && (
                 <>
                   <Link to="/cliente">
                     <li

@@ -50,6 +50,7 @@ class Record(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, unique=False, nullable=False)
     operation = db.Column(db.String(255), unique=False, nullable=False)
+    result = db.Column(db.String(255), unique=False, nullable=False)
     user_id = db.Column(db.Integer, ForeignKey(
         'user.id'))
     user = db.relationship('User')
@@ -63,5 +64,6 @@ class Record(db.Model):
             "date": self.date,
             "user_id": self.user_id,
             "user": self.user,
-            "operation": self.operation
+            "operation": self.operation,
+            "result": self.result
         }

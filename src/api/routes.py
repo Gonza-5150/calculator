@@ -63,10 +63,10 @@ def get_user(user_id):
     user = User.query.get(user_id)
     return jsonify(user.serialize()), 200
 
-# ____Agregar clientes___
+# ____Add User___
 
 
-@api.route('/user/operation', methods=["POST"])
+@api.route('/users/operation', methods=["POST"])
 def operation(first, op_type, second):
     first = request.json.get("first", None)
     second = request.json.get("second", None)
@@ -89,25 +89,10 @@ def operation(first, op_type, second):
     return jsonify("msg: operation ok"), 200
 
 
-# Delete cliente
-# @api.route('/clientes/<int:id_cliente>', methods=["DELETE"])
-# def delete_cliente(id_cliente):
-#     delete = Cliente.query.filter_by(id=id_cliente).first()
+# Delete user
+# @api.route('/users/<int:id_user>', methods=["DELETE"])
+# def delete_user(id_cliente):
+#     delete = User.query.filter_by(id=id_user).first()
 #     db.session.delete(delete)
 #     db.session.commit()
-#     return jsonify({"msj": "Cliente borrado"}), 200
-
-# Put Cliente
-
-
-# @api.route('/clientes/<int:id>', methods=["PUT"])
-# def update_cliente(id):
-#     body = request.get_json()
-#     print(id)
-#     cliente = Cliente.query.filter(Cliente.id == id).update({
-#         Cliente.nombre: body["nombre"],
-#         Cliente.direccion: body["direccion"],
-#         Cliente.telefono: body["telefono"],
-#         Cliente.user_id: body["user_id"]}, synchronize_session=False)
-#     db.session.commit()
-#     return jsonify({"msj": "Cliente actualizado"}), 200
+#     return jsonify({"msj": "Bye User!"}), 200

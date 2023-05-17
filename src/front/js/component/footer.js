@@ -18,10 +18,10 @@ export const Footer = () => (
             <div className="col-md-3 col-lg-4 col-xl-1 mx-auto mb-3">
               {/* Content */}
               <img
-                src="LogotipoPS.png"
+                src="calculadora.png"
                 alt="Logo"
-                width="135"
-                height="120"
+                width="75"
+                height="75"
                 className="align-middle"
               />
             </div>
@@ -30,21 +30,9 @@ export const Footer = () => (
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-2">
               {/* Links */}
               <h6 className="text-uppercase fw-bold mb-3">Servicios</h6>
-              <p>
-                <a className="text-reset" href="#loginScreen">
-                  Acceder
-                </a>
-              </p>
-              <p>
-                <a className="text-reset" href="#bgBeneficios">
-                  Beneficios
-                </a>
-              </p>
-              <p>
-                <a className="text-reset" href="#aboutUs">
-                  Sobre nosotros
-                </a>
-              </p>
+              <p></p>
+              <p></p>
+              <p></p>
               <p>
                 <a className="text-reset" href="#contactUs">
                   Contáctenos
@@ -54,15 +42,13 @@ export const Footer = () => (
             <div className="col-md-1 col-lg-1 col-xl-3 mx-auto mb-md-0 mb-1">
               {/* Links */}
               <h6 className="text-uppercase fw-bold mb-3">Contactenos</h6>
-              <p>
-                <i className="fas fa-home me-2" /> San Jose, CR 10012
-              </p>
+
               <p>
                 <i className="fas fa-envelope me-2" />
-                petsource@4geeks.com
+                estevesgonzalo@hotmail.com
               </p>
               <p>
-                <i className="fas fa-phone me-2" /> +01 234 567 88
+                <i className="fas fa-phone me-2" /> +54 11 3469 414
               </p>
             </div>
             {/* Grid column */}
