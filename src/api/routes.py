@@ -11,6 +11,8 @@ from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 import json
 from datetime import datetime
+import math
+import random
 
 api = Blueprint('api', __name__)
 
@@ -202,6 +204,85 @@ def multiplication():
         user_balance=user_balance,
         operation_response=str(result),
         date=datetime.now()
+    )
+
+    db.session.add(record)
+    db.session.commit()
+
+    return jsonify({'result': result}), 200
+
+# SQRT
+
+
+@api.route('/sqrt', methods=["POST"])
+def sqrt():
+    data = request.json
+    user_id = data['user_id']
+    amount1 = data['amount1']
+
+    user = User.query.get(user_id)
+    operation = Operation.query.filter_by(type='multiplication').first()
+
+    if not user or not operation:
+        return jsonify({'messaje': 'User or operation not found'}), 404
+
+    cost = operation.cost
+    user_balance = user.balance - cost
+
+    if user_balance < 0:
+        return jsonify({'message': 'Insuficient balance'}), 403
+
+    if amount1 < 0:
+        return jsonify({'message': 'Invalid input: number must be not negative'}), 400
+
+    result = math.sqrt(amount1)
+    record = Record(
+        operation_id=operation.id,
+        user_id=user.id,
+        amount=result,
+        user_balance=user_balance,
+        operation_response=str(result),
+        date=datetime.now()
+    )
+
+    db.session.add(record)
+    db.session.commit()
+
+    return jsonify({'result': result}), 200
+
+# RANDOM
+
+
+@api.route('/randn', methods=["POST"])
+def randn():
+    data = request.json
+    user_id = data['user_id']
+    amount1 = data['amount1']
+    amount2 = data['amount2']
+
+    user = User.query.get(user_id)
+    operation = Operation.query.filter_by(type='randn').first()
+
+    if not user or not operation:
+        return jsonify({'message': 'User or operation not found'}), 404
+
+    cost = operation.cost
+    user_balance = user.balance - cost
+
+    if user_balance < 0:
+        return jsonify({'message': 'Insufficient balance'}), 403
+
+    if amount1 >= amount2:
+        return jsonify({'message': 'Invalid input: range_min must be less than range_max'}), 400
+
+    result = random.randint(amount1, amount2)
+    record = Record(
+        operation_id=operation.id,
+        user_id=user.id,
+        amount=result,
+        user_balance=user_balance,
+        operation_response=str(result),
+        date=datetime.utcnow().date()
     )
 
     db.session.add(record)
