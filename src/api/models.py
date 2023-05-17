@@ -26,8 +26,8 @@ class User(db.Model):
 
 class Operation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.Date, unique=False, nullable=False)
-    op_type = db.Column(db.Date, unique=False, nullable=False)
+    op_type = db.Column(db.String(255), unique=False, nullable=False)
+    cost = db.Column(db.Integer, unique=False, nullable=False)
 
     def __repr__(self):
         return f'<Operation {self.id}>'
@@ -35,24 +35,22 @@ class Operation(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "date": self.date,
             "op_type": self.op_type,
+            "cost": self.cost,
         }
 
 
 class Record(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, unique=False, nullable=False)
-    operation = db.Column(db.String(255), unique=False, nullable=False)
-    result = db.Column(db.String(255), unique=False, nullable=False)
-    amount = db.Column(db.String(250), unique=False, nullable=True)
-    user_balance = db.Column(db.String(250), unique=False, nullable=True)
+
+    result = db.Column(db.Integer, unique=False, nullable=False)
+    cost = db.Column(db.Integer, unique=False, nullable=False)
 
     user_id = db.Column(db.Integer, ForeignKey(
         'user.id'))
-
-    def __repr__(self):
-        return f'<Record {self.id}>'
+    op_type_id = db.Column(db.Integer, ForeignKey(
+        'operation.id'))
 
     def serialize(self):
         return {
