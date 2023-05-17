@@ -29,15 +29,6 @@ export const Footer = () => (
             {/* Grid column */}
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-2">
               {/* Links */}
-              <h6 className="text-uppercase fw-bold mb-3">Servicios</h6>
-              <p></p>
-              <p></p>
-              <p></p>
-              <p>
-                <a className="text-reset" href="#contactUs">
-                  Contáctenos
-                </a>
-              </p>
             </div>
             <div className="col-md-1 col-lg-1 col-xl-3 mx-auto mb-md-0 mb-1">
               {/* Links */}

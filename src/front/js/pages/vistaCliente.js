@@ -9,7 +9,7 @@ export const VistaCliente = () => {
     <>
       <h3 className="text-success m-2 p-4">¡Welcome to calculator!</h3>
       <div className="m-2 p-3">
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between align-middle">
           <div className="ms-5">
             <h4 className="text-success text-sm-start m-2">Calculator</h4>
             <div class="mb-3">
