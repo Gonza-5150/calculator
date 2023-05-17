@@ -41,8 +41,6 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
-# ***********************ENPOINT USERS************************
-# ---------------------------------------------------------------
 
 # All Users
 
@@ -63,10 +61,10 @@ def get_user(user_id):
     user = User.query.get(user_id)
     return jsonify(user.serialize()), 200
 
-# ADITION **
+# ADDITION **
 
 
-@api.route('/users/addition', methods=["POST"])
+@api.route('/addition', methods=["POST"])
 def addition():
     data = request.json
     user_id = data['user_id']
@@ -77,10 +75,10 @@ def addition():
     operation = Operation.query.filter_by(type='addition').first()
 
     if not user or not operation:
-        return jsonyfy({'messaje': 'User or operation not found'}), 404
+        return jsonify({'messaje': 'User or operation not found'}), 404
 
     cost = operation.cost
-    user_balance = user_balance - cost
+    user_balance = user.balance - cost
 
     if user_balance < 0:
         return jsonify({'message': 'Insuficient balance'}), 403
@@ -92,7 +90,7 @@ def addition():
         amount=result,
         user_balance=user_balance,
         operation_response=str(result),
-        date=func.now()
+        date=datetime.now()
     )
 
     db.session.add(record)
@@ -103,7 +101,8 @@ def addition():
 # SUBSTRACTION ***
 
 
-def subtraction():
+@api.route('/substraction', methods=["POST"])
+def substraction():
     data = request.json
     user_id = data['user_id']
     amount1 = data['amount1']
@@ -113,10 +112,10 @@ def subtraction():
     operation = Operation.query.filter_by(type='substraction').first()
 
     if not user or not operation:
-        return jsonyfy({'messaje': 'User or operation not found'}), 404
+        return jsonify({'messaje': 'User or operation not found'}), 404
 
     cost = operation.cost
-    user_balance = user_balance - cost
+    user_balance = user.balance - cost
 
     if user_balance < 0:
         return jsonify({'message': 'Insuficient balance'}), 403
@@ -128,7 +127,7 @@ def subtraction():
         amount=result,
         user_balance=user_balance,
         operation_response=str(result),
-        date=func.now()
+        date=datetime.now()
     )
 
     db.session.add(record)
@@ -139,6 +138,7 @@ def subtraction():
 # DIVISION ***
 
 
+@api.route('/division', methods=["POST"])
 def division():
     data = request.json
     user_id = data['user_id']
@@ -149,22 +149,22 @@ def division():
     operation = Operation.query.filter_by(type='division').first()
 
     if not user or not operation:
-        return jsonyfy({'messaje': 'User or operation not found'}), 404
+        return jsonify({'messaje': 'User or operation not found'}), 404
 
     cost = operation.cost
-    user_balance = user_balance / cost
+    user_balance = user.balance - cost
 
     if user_balance < 0:
         return jsonify({'message': 'Insuficient balance'}), 403
 
-    result = amount1 + amount2
+    result = amount1 / amount2
     record = Record(
         operation_id=operation.id,
         user_id=user.id,
         amount=result,
         user_balance=user_balance,
         operation_response=str(result),
-        date=func.now()
+        date=datetime.now()
     )
 
     db.session.add(record)
@@ -175,6 +175,7 @@ def division():
 # MULTIPLICATION ***
 
 
+@api.route('/multiplication', methods=["POST"])
 def multiplication():
     data = request.json
     user_id = data['user_id']
@@ -185,22 +186,22 @@ def multiplication():
     operation = Operation.query.filter_by(type='multiplication').first()
 
     if not user or not operation:
-        return jsonyfy({'messaje': 'User or operation not found'}), 404
+        return jsonify({'messaje': 'User or operation not found'}), 404
 
     cost = operation.cost
-    user_balance = user_balance * cost
+    user_balance = user.balance - cost
 
     if user_balance < 0:
         return jsonify({'message': 'Insuficient balance'}), 403
 
-    result = amount1 + amount2
+    result = amount1 * amount2
     record = Record(
         operation_id=operation.id,
         user_id=user.id,
         amount=result,
         user_balance=user_balance,
         operation_response=str(result),
-        date=func.now()
+        date=datetime.now()
     )
 
     db.session.add(record)
