@@ -193,7 +193,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 imageHeight: 180,
                 imageAlt: "cat",
                 title: "Ups",
-                text: "Correo o contraseña incorrecta",
+                text: "operacion incorrecta",
                 confirmButtonColor: "orange",
               });
               return false;
@@ -212,9 +212,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           const data = await resp.json();
           console.log("from the back", data);
-          sessionStorage.setItem("token", data.access_token);
           console.log(data);
-          setStore({ token: data.access_token });
           return true;
         } catch (error) {
           console.error("There has been an error");

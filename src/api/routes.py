@@ -85,7 +85,7 @@ def addition():
     if user_balance < 0:
         return jsonify({'message': 'Insuficient balance'}), 403
 
-    result = amount1 + amount2
+    result = int(amount1) + int(amount2)
     record = Record(
         operation_id=operation.id,
         user_id=user.id,
@@ -122,7 +122,7 @@ def substraction():
     if user_balance < 0:
         return jsonify({'message': 'Insuficient balance'}), 403
 
-    result = amount1 - amount2
+    result = int(amount1) - int(amount2)
     record = Record(
         operation_id=operation.id,
         user_id=user.id,
@@ -159,7 +159,7 @@ def division():
     if user_balance < 0:
         return jsonify({'message': 'Insuficient balance'}), 403
 
-    result = amount1 / amount2
+    result = int(amount1) / int(amount2)
     record = Record(
         operation_id=operation.id,
         user_id=user.id,
@@ -196,7 +196,7 @@ def multiplication():
     if user_balance < 0:
         return jsonify({'message': 'Insuficient balance'}), 403
 
-    result = amount1 * amount2
+    result = int(amount1) * int(amount2)
     record = Record(
         operation_id=operation.id,
         user_id=user.id,
