@@ -172,16 +172,17 @@ const getState = ({ getStore, getActions, setStore }) => {
         const opts = {
           method: "POST",
           headers: {
-            "Content-type": "application/json",
+            "Content-type": "application/addition",
           },
           body: JSON.stringify({
-            user_id: email,
-            password: password,
+            user_id: user_id,
+            amount1: amount1,
+            amount2: amount2,
           }),
         };
         try {
           const resp = await fetch(
-            process.env.BACKEND_URL + "/api/token",
+            process.env.BACKEND_URL + "/api/addition",
             opts
           );
           if (resp.status !== 200) {
