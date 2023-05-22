@@ -168,7 +168,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       // ejemplo
-      addition: async (firstNumber, secondNumber) => {
+      addition: async (user_id, amount1, amount2) => {
         const opts = {
           method: "POST",
           headers: {
@@ -204,7 +204,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               imageHeight: 180,
               imageAlt: "cat",
               title: "Ups",
-              text: "Error al accesar. Intente de nuevo.",
+              text: "Intente de nuevo.",
               confirmButtonColor: "orange",
             });
             return false;

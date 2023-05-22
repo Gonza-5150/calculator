@@ -24,11 +24,11 @@ export const VistaCliente = () => {
               </label>
               <input
                 value={firstNumber}
-                type="text"
+                type="number"
                 className="form-control"
                 id="formGroupExampleInput"
                 placeholder="Put your first number"
-                onChange={(e) => setFirstNumber(e.target.value)}
+                onChange={(e) => setFirstNumber(Number(e.target.value))}
               />
             </div>
             <button
@@ -79,16 +79,13 @@ export const VistaCliente = () => {
               </label>
               <input
                 value={secondNumber}
-                type="text"
+                type="number"
                 className="form-control"
                 id="formGroupExampleInput2"
                 placeholder="Put your second number"
-                onChange={(e) => setSecondNumber(e.target.value)}
+                onChange={(e) => setSecondNumber(Number(e.target.value))}
               />
             </div>
-            <button type="button" className="btn btn-dark">
-              Result
-            </button>
             <input
               className="form-control"
               type="text"
