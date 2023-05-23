@@ -30,6 +30,13 @@ export const VistaCliente = () => {
                 placeholder="Put your first number"
                 onChange={(e) => setFirstNumber(Number(e.target.value))}
               />
+              <button
+                type="button"
+                className="btn btn-warning"
+                onClick={() => setOperation("sqrt")}
+              >
+                sqr
+              </button>
               <div className="mb-3">
                 <label htmlFor="formGroupExampleInput2" className="form-label">
                   Second number
@@ -71,13 +78,6 @@ export const VistaCliente = () => {
               onClick={() => setOperation("division")}
             >
               %
-            </button>
-            <button
-              type="button"
-              className="btn btn-warning"
-              onClick={() => setOperation("sqrt")}
-            >
-              sqr
             </button>
             <button
               type="button"
