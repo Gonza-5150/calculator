@@ -30,6 +30,19 @@ export const VistaCliente = () => {
                 placeholder="Put your first number"
                 onChange={(e) => setFirstNumber(Number(e.target.value))}
               />
+              <div className="mb-3">
+                <label htmlFor="formGroupExampleInput2" className="form-label">
+                  Second number
+                </label>
+                <input
+                  value={secondNumber}
+                  type="number"
+                  className="form-control"
+                  id="formGroupExampleInput2"
+                  placeholder="Put your second number"
+                  onChange={(e) => setSecondNumber(Number(e.target.value))}
+                />
+              </div>
             </div>
             <button
               type="button"
@@ -73,19 +86,6 @@ export const VistaCliente = () => {
             >
               randN
             </button>
-            <div className="mb-3">
-              <label htmlFor="formGroupExampleInput2" className="form-label">
-                Second number
-              </label>
-              <input
-                value={secondNumber}
-                type="number"
-                className="form-control"
-                id="formGroupExampleInput2"
-                placeholder="Put your second number"
-                onChange={(e) => setSecondNumber(Number(e.target.value))}
-              />
-            </div>
             <input
               className="form-control"
               type="text"
