@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Context } from "../store/appContext";
 import "../../styles/cliente.css";
@@ -10,7 +10,19 @@ export const VistaCliente = () => {
   const [operation, setOperation] = useState();
   const [firstNumber, setFirstNumber] = useState();
   const [secondNumber, setSecondNumber] = useState();
+  const [result, setResult] = useState("");
 
+  const handleOperations = async () => {
+    if (operation == "addition") {
+      const response = await actions.addition(firstNumber, secondNumber);
+      console.log(response);
+      setResult(response.result);
+    }
+  };
+
+  useEffect(() => {
+    handleOperations();
+  }, [operation]);
   return (
     <>
       <h3 className="text-success m-2 p-4">¡Welcome to calculator!</h3>
@@ -24,7 +36,7 @@ export const VistaCliente = () => {
               </label>
               <input
                 value={firstNumber}
-                type="number"
+                type="text"
                 className="form-control"
                 id="formGroupExampleInput"
                 placeholder="Put your first number"
@@ -89,7 +101,7 @@ export const VistaCliente = () => {
             <input
               className="form-control"
               type="text"
-              value="Result..."
+              value={"Result... " + result}
               aria-label="result"
               readOnly
             ></input>

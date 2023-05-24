@@ -96,6 +96,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           sessionStorage.setItem("token", data.access_token);
           console.log(data);
           setStore({ token: data.access_token });
+          setStore({ currentUser: data.user_id });
           return true;
         } catch (error) {
           console.error("There has been an error");
@@ -168,14 +169,16 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       // ejemplo
-      addition: async (user_id, amount1, amount2) => {
+      addition: async (amount1, amount2) => {
+        const store = getStore();
+        console.log(store.currentUser);
         const opts = {
           method: "POST",
           headers: {
-            "Content-type": "application/addition",
+            "Content-type": "application/json",
           },
           body: JSON.stringify({
-            user_id: user_id,
+            user_id: store.currentUser,
             amount1: amount1,
             amount2: amount2,
           }),
@@ -213,7 +216,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await resp.json();
           console.log("from the back", data);
           console.log(data);
-          return true;
+          return data;
         } catch (error) {
           console.error("There has been an error");
         }
